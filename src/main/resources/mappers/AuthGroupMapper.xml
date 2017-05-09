@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.jlu.personnel.management.dao.AuthGroupDao">
+
+    <resultMap id="BaseResultMap" type="cn.edu.jlu.personnel.management.vo.model.AuthGroup">
+        <id column="id" property="id"/>
+        <result column="group_name" property="groupName"/>
+        <result column="type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,group_name,type,create_time,update_time
+    </sql>
+
+    <select id="selectAuthGroups" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM auth_group
+    </select>
+
+    <insert id="insertAuthGroup" parameterType="AuthGroup">
+        INSERT INTO auth_group(group_name,type) VALUE (#{groupName},#{type})
+    </insert>
+
+    <delete id="deleteAuthGroup" >
+        DELETE FROM auth_group
+        WHERE group_name = #{groupName}
+    </delete>
+
+    <update id="updateAuthGroup" parameterType="AuthGroup">
+        UPDATE auth_group
+        <set>
+            <if test="groupName != null">
+                group_name = #{groupName},
+            </if>
+            <if test="type != null">
+                type = #{type}
+            </if>
+        </set>
+        WHERE id = #{id} and update_time = #{updateTime}
+    </update>
+</mapper>

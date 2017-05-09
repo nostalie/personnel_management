@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.jlu.personnel.management.dao.PositionDao">
+
+    <resultMap id="BaseResultMap" type="cn.edu.jlu.personnel.management.vo.model.Position">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,create_time,update_time
+    </sql>
+
+    <select id="selectPositions" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_position
+    </select>
+
+    <insert id="insertPosition" parameterType="Position">
+        INSERT INTO t_position(name) VALUE (#{name})
+    </insert>
+
+    <delete id="deletePosition" >
+        DELETE FROM t_position
+        WHERE name = #{name}
+    </delete>
+
+    <update id="updatePosition" parameterType="Position">
+        UPDATE t_position
+        SET name = #{name}
+        WHERE id = #{id} AND update_time = #{updateTime}
+    </update>
+</mapper>

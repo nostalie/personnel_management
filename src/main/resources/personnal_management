@@ -1,0 +1,110 @@
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+  id            INT AUTO_INCREMENT NOT NULL
+  COMMENT '自增主键',
+  real_name     VARCHAR(50)        NOT NULL                             DEFAULT 'nostalie'
+  COMMENT '用户真实姓名',
+  user_name     VARCHAR(50)        NOT NULL                             DEFAULT 'nostalie' UNIQUE
+  COMMENT '用户名',
+  gender        TINYINT            NOT NULL                             DEFAULT '0'
+  COMMENT '0-男，1-女',
+  birthday      TIMESTAMP          NOT NULL                             DEFAULT now()
+  COMMENT '生日',
+  password      VARCHAR(300)       NOT NULL                             DEFAULT ''
+  COMMENT '密码',
+  department_id INT                NOT NULL                             DEFAULT -1
+  COMMENT '所属部门',
+  position_id   INT                NOT NULL                             DEFAULT -1
+  COMMENT '职位',
+  create_time   TIMESTAMP          NOT NULL                             DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  update_time   TIMESTAMP          NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  COMMENT '更新时间',
+  PRIMARY KEY (id),
+  INDEX idx_real_name (real_name),
+  UNIQUE INDEX uniq_user_name (user_name),
+  INDEX idx_department_id (department_id),
+  INDEX idx_position_id (position_id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  COMMENT = '用户信息表';
+
+DROP TABLE IF EXISTS department;
+CREATE TABLE department (
+  id          INT AUTO_INCREMENT NOT NULL
+  COMMENT '自增主键',
+  name        VARCHAR(50) UNIQUE NOT NULL                             DEFAULT ''
+  COMMENT '部门名称',
+  tel         VARCHAR(20)        NOT NULL                             DEFAULT ''
+  COMMENT '部门联系电话',
+  user_id     INT                NOT NULL
+  COMMENT '部门leader',
+  create_time TIMESTAMP          NOT NULL                             DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  update_time TIMESTAMP          NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  COMMENT '更新时间',
+  PRIMARY KEY (id),
+  UNIQUE INDEX uniq_name (name),
+  INDEX idx_user_id (user_id)
+)
+  ENGINE = innodb
+  DEFAULT CHARSET = utf8
+  COMMENT = '部门信息表';
+
+DROP TABLE IF EXISTS t_position;
+CREATE TABLE t_position (
+  id          INT AUTO_INCREMENT NOT NULL
+  COMMENT '自增主键',
+  name        VARCHAR(50) UNIQUE NOT NULL                             DEFAULT ''
+  COMMENT '职位名称',
+  create_time TIMESTAMP          NOT NULL                             DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  update_time TIMESTAMP          NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  COMMENT '更新时间',
+  PRIMARY KEY (id),
+  UNIQUE INDEX uniq_name (name)
+)
+  ENGINE = innodb
+  DEFAULT CHARSET = utf8
+  COMMENT = '职位信息表';
+
+DROP TABLE IF EXISTS auth_group;
+CREATE TABLE auth_group (
+  id          INT       NOT NULL                             AUTO_INCREMENT
+  COMMENT '自增主键',
+  group_name VARCHAR(50) UNIQUE NOT NULL
+  COMMENT '权限组名称',
+  type        TINYINT   NOT NULL                             DEFAULT 0
+  COMMENT '权限组合的值',
+  create_time TIMESTAMP NOT NULL                             DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  update_time TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  COMMENT '更新时间',
+  PRIMARY KEY (id),
+  UNIQUE INDEX uniq_group_name (group_name)
+)
+  ENGINE = innodb
+  DEFAULT CHARSET = utf8
+  COMMENT = '权限组信息表';
+
+DROP TABLE IF EXISTS user_auth;
+CREATE TABLE user_auth (
+  id          INT AUTO_INCREMENT NOT NULL
+  COMMENT '自增主键',
+  user_id     INT                NOT NULL
+  COMMENT '用户id',
+  auth_id     INT                NOT NULL
+  COMMENT '权限组id',
+  create_time TIMESTAMP          NOT NULL                             DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  update_time TIMESTAMP          NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  COMMENT '更新时间',
+  PRIMARY KEY (id),
+  INDEX idx_user_id (user_id),
+  INDEX idx_auth_id (auth_id),
+  UNIQUE index uniq_user_id_auth_id (user_id,auth_id)
+)
+  ENGINE = innodb
+  DEFAULT CHARSET = utf8
+  COMMENT = '用户-权限表';
