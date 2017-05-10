@@ -14,6 +14,8 @@ public interface UserAuthDao {
 
     int insertUserAuth(UserAuth userAuth);
 
+    UserAuth selectUserAuth(@Param("userId") int userId,@Param("authId") int authId);
+
     List<UserAuth> selectUserAuthByUserId(@Param("userId") int userId);
 
     List<UserAuth> selectUserAuthByAuthGroupId(@Param("authId") int authId);

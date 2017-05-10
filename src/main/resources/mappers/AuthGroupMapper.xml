@@ -20,6 +20,13 @@
         FROM auth_group
     </select>
 
+    <select id="selectAuthGroupGById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM auth_group
+        WHERE id = #{authGroupId}
+    </select>
+
     <insert id="insertAuthGroup" parameterType="AuthGroup">
         INSERT INTO auth_group(group_name,type) VALUE (#{groupName},#{type})
     </insert>

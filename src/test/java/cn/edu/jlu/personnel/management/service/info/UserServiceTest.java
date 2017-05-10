@@ -1,4 +1,4 @@
-package cn.edu.jlu.personnel.management.userInfo;
+package cn.edu.jlu.personnel.management.service.info;
 
 import cn.edu.jlu.personnel.management.vo.model.User;
 import org.junit.Assert;
@@ -11,10 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
-import java.util.Calendar;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by nostalie on 17-5-9.
@@ -30,6 +27,8 @@ public class UserServiceTest {
     public void testQuery(){
         User user = userService.queryUserInfo("nostalie").get();
         LOGGER.debug("user is: {}",user);
+        User user2 = userService.queryUserById(3).get();
+        LOGGER.debug("user2 is: {}",user2);
         List<User> userList = userService.queryUsers(user);
         LOGGER.debug("userList is: {}",userList);
     }

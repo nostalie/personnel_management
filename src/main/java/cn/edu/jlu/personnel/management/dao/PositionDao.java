@@ -14,9 +14,11 @@ public interface PositionDao {
 
     List<Position> selectPositions();
 
+    Position selectPositionById(@Param("positionId") Integer positionId);
+
     int insertPosition(Position position);
 
-    int deletePosition(@Param("name") String name);
+    int deletePosition(@Param("positionId") Integer positionId);
 
     int updatePosition(Position position);
 }

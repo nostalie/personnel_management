@@ -15,9 +15,11 @@ public interface DepartmentDao {
 
     List<Department> selectDepartments();
 
+    Department selectDepartmentById(@Param("departmentId") Integer departmentId);
+
     int insertDepartment(Department department);
 
-    int deleteDepartment(@Param("name") String name);
+    int deleteDepartment(@Param("departmentId") Integer departmentId);
 
     int updateDepartment(Department department);
 }

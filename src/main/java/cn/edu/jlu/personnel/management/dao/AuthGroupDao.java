@@ -15,6 +15,8 @@ public interface AuthGroupDao {
 
     List<AuthGroup> selectAuthGroups();
 
+    AuthGroup selectAuthGroupGById(@Param("authGroupId") Integer authGroupId);
+
     int insertAuthGroup(AuthGroup authGroup);
 
     int deleteAuthGroup(@Param("groupName") String groupName);

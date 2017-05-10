@@ -21,13 +21,20 @@
         FROM department
     </select>
 
+    <select id="selectDepartmentById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM department
+        WHERE id = #{departmentId}
+    </select>
+
     <insert id="insertDepartment" parameterType="Department">
         INSERT INTO department(name,tel,user_id) VALUE (#{name},#{tel},#{userId})
     </insert>
 
     <delete id="deleteDepartment" >
         DELETE FROM department
-        WHERE name = #{name}
+        WHERE id = #{departmentId}
     </delete>
 
     <update id="updateDepartment" parameterType="Department">

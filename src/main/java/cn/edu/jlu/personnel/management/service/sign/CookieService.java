@@ -1,4 +1,4 @@
-package cn.edu.jlu.personnel.management.sign;
+package cn.edu.jlu.personnel.management.service.sign;
 
 import cn.edu.jlu.personnel.management.util.EncryptUtil;
 import cn.edu.jlu.personnel.management.web.interceptor.IdentityInterceptor;

@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public enum Gender {
 
-    MEN(0, "男"), WONMEN(1, "女");
+    MEN(0, "男"), WOMEN(1, "女");
 
     private int id;
     private String description;

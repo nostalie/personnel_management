@@ -1,8 +1,10 @@
-package cn.edu.jlu.personnel.management.userInfo;
+package cn.edu.jlu.personnel.management.service.info;
 
 import cn.edu.jlu.personnel.management.dao.UserDao;
 import cn.edu.jlu.personnel.management.support.Read;
 import cn.edu.jlu.personnel.management.util.EncryptUtil;
+import cn.edu.jlu.personnel.management.vo.model.Department;
+import cn.edu.jlu.personnel.management.vo.model.Position;
 import cn.edu.jlu.personnel.management.vo.model.User;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -24,6 +26,10 @@ public class UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
     @Resource
     private UserDao userDao;
+    @Resource
+    private DepartmentService departmentService;
+    @Resource
+    private PositionService positionService;
 
     /**
      * 由用户名查询用户信息
@@ -37,6 +43,7 @@ public class UserService {
             User result = userDao.selectUserByUserName(userName);
             if(result != null) {
                 result.setPassword(EncryptUtil.decode(result.getPassword()));
+                fillUser(result);
             }
             return Optional.fromNullable(result);
         } catch (Exception e) {
@@ -45,6 +52,21 @@ public class UserService {
         }
     }
 
+    @Read
+    public Optional<User> queryUserById(Integer userId){
+        try {
+            Preconditions.checkNotNull(userId);
+            User result = userDao.selectUserByUserId(userId);
+            if(result != null){
+                result.setPassword(EncryptUtil.decode(result.getPassword()));
+                fillUser(result);
+            }
+            return Optional.fromNullable(result);
+        } catch (Exception e) {
+            LOGGER.error("查询用户信息失败，userId is: {}",userId,e);
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * 按条件查询结果集
      * @param user
@@ -60,12 +82,25 @@ public class UserService {
             return Lists.transform(userDao.selectUsers(user), new Function<User, User>() {
                 public User apply(User user) {
                     user.setPassword(EncryptUtil.decode(user.getPassword()));
+                    fillUser(user);
                     return user;
                 }
             });
         } catch (Exception e) {
             LOGGER.error("安条件查询用户失败，查询条件为: {}",user);
             throw new RuntimeException(e);
+        }
+    }
+
+    private void fillUser(User user){
+        Preconditions.checkNotNull(user);
+        Optional<Department> departmentOptional = departmentService.queryDepartmentById(user.getDepartmentId());
+        Optional<Position> positionOptional = positionService.queryPositionById(user.getPositionId());
+        if(departmentOptional.isPresent()){
+            user.setDepartment(departmentOptional.get());
+        }
+        if(positionOptional.isPresent()){
+            user.setPosition(positionOptional.get());
         }
     }
 

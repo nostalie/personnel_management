@@ -14,6 +14,14 @@ public class DataSourceContext {
         dataSourceContext.set(context);
     }
 
+    public static void master(){
+        setDataSourceContext(DataSourceType.MASTER.toString());
+    }
+
+    public static void salve(){
+        setDataSourceContext(DataSourceType.SLAVE.toString());
+    }
+
     static String getDataSourceContext(){
         return dataSourceContext.get();
     }

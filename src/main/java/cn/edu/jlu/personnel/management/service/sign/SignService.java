@@ -1,4 +1,4 @@
-package cn.edu.jlu.personnel.management.sign;
+package cn.edu.jlu.personnel.management.service.sign;
 
 import cn.edu.jlu.personnel.management.dao.UserDao;
 import cn.edu.jlu.personnel.management.support.Read;

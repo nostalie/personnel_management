@@ -37,6 +37,13 @@
         WHERE auth_id = #{authId}
     </select>
 
+    <select id="selectUserAuth" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user_auth
+        WHERE auth_id = #{authId} AND user_id = #{userId}
+    </select>
+
     <delete id="deleteUserAuth">
         DELETE FROM user_auth
         WHERE user_id = #{userId} AND auth_id = #{authId}

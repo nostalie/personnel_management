@@ -41,12 +41,6 @@ public class PositionDaoTest {
     }
 
     @Test
-    public void testDelete(){
-        int count = positionDao.deletePosition("经理");
-        LOGGER.debug("count is: {}",count);
-    }
-
-    @Test
     public void testUpdate(){
         Position position = positionDao.selectPositions().get(0);
         position.setName("经理");

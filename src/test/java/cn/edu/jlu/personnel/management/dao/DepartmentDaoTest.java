@@ -43,12 +43,6 @@ public class DepartmentDaoTest {
     }
 
     @Test
-    public void testDelete(){
-        int count = departmentDao.deleteDepartment("采购");
-        LOGGER.debug("count is: {}",count);
-    }
-
-    @Test
     public void testUpdate(){
         Department department = departmentDao.selectDepartments().get(0);
         department.setTel("333333333333");

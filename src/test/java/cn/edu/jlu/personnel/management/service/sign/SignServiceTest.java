@@ -1,4 +1,4 @@
-package cn.edu.jlu.personnel.management.sign;
+package cn.edu.jlu.personnel.management.service.sign;
 
 import cn.edu.jlu.personnel.management.vo.model.User;
 import org.junit.Test;
@@ -9,8 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by nostalie on 17-5-9.

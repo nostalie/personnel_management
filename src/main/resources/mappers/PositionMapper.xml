@@ -19,13 +19,20 @@
         FROM t_position
     </select>
 
+    <select id="selectPositionById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_position
+        WHERE id = #{positionId}
+    </select>
+
     <insert id="insertPosition" parameterType="Position">
         INSERT INTO t_position(name) VALUE (#{name})
     </insert>
 
     <delete id="deletePosition" >
         DELETE FROM t_position
-        WHERE name = #{name}
+        WHERE id = #{positionId}
     </delete>
 
     <update id="updatePosition" parameterType="Position">
