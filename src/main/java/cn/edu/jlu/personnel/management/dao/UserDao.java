@@ -14,7 +14,11 @@ public interface UserDao {
 
     List<User> selectUsers(User user);
 
+    User selectUserByUserName(@Param("userName") String userName);
+
     int deleteUserByUserName(@Param("userName") String userName);
 
     int insertUser(User user);
+
+    int updateUser(User user);
 }

@@ -1,6 +1,7 @@
 package cn.edu.jlu.personnel.management.sign;
 
 import cn.edu.jlu.personnel.management.dao.UserDao;
+import cn.edu.jlu.personnel.management.support.Read;
 import cn.edu.jlu.personnel.management.util.EncryptUtil;
 import cn.edu.jlu.personnel.management.vo.model.User;
 import cn.edu.jlu.personnel.management.web.interceptor.IdentityInterceptor;
@@ -28,6 +29,7 @@ public class SignService {
     @Resource
     private UserDao userDao;
 
+    @Read
     public String signIn(Cookie[] cookies,User user){
         try {
             //用户名密码登录

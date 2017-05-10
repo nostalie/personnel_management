@@ -51,6 +51,13 @@
         </where>
     </select>
 
+    <select id="selectUserByUserName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user
+        WHERE user_name = #{userName}
+    </select>
+
     <delete id="deleteUserByUserName" parameterType="java.lang.String">
         DELETE FROM user
         WHERE user_name = #{userName}
@@ -85,4 +92,32 @@
             </if>
         </trim>
     </insert>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE user
+        <set>
+            <if test="realName != null">
+                real_name = #{realName},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId},
+            </if>
+            <if test="positionId != null">
+                position_id = #{positionId},
+            </if>
+        </set>
+        WHERE id = #{id} AND update_time = #{updateTime}
+    </update>
 </mapper>
