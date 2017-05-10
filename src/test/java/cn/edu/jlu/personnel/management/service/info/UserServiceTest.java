@@ -25,7 +25,7 @@ public class UserServiceTest {
     private UserService userService;
     @Test
     public void testQuery(){
-        User user = userService.queryUserInfo("nostalie").get();
+        User user = userService.queryUserInfo("nos").get();
         LOGGER.debug("user is: {}",user);
         User user2 = userService.queryUserById(3).get();
         LOGGER.debug("user2 is: {}",user2);

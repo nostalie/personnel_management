@@ -74,4 +74,15 @@ public class AuthGroupService {
             throw new RuntimeException(e);
         }
     }
+
+    @Read
+    public AuthGroup queryGroupById(Integer authGroupId){
+        try {
+            Preconditions.checkNotNull(authGroupId);
+            return authGroupDao.selectAuthGroupGById(authGroupId);
+        } catch (Exception e) {
+            LOGGER.error("查询权限组失败,group id is: {}",authGroupId,e);
+            throw new RuntimeException(e);
+        }
+    }
 }

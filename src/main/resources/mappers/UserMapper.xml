@@ -55,7 +55,7 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM user
-        WHERE user_name = #{userName}
+        WHERE user_name LIKE concat('%',#{userName},'%')
     </select>
 
     <select id="selectUserByUserId" resultMap="BaseResultMap">
