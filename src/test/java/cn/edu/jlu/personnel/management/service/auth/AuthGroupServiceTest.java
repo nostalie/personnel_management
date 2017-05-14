@@ -27,7 +27,7 @@ public class AuthGroupServiceTest {
     @Test
     public void testAdd(){
         AuthGroup authGroup = new AuthGroup();
-        authGroup.setType(Auth.blend(Auth.SUPER_LEADER,Auth.GROUP_AUTH,Auth.USER_AUTH));
+        authGroup.setType(Auth.blend(Auth.SUPER_LEADER,Auth.GROUP_AUTH,Auth.USER_AUTH,Auth.ORDINARY,Auth.BU_LEADER));
         authGroup.setGroupName("root");
         int count = authGroupService.addGroup(authGroup);
         Assert.assertEquals(count,1);

@@ -2,6 +2,7 @@ package cn.edu.jlu.personnel.management.dao;
 
 import cn.edu.jlu.personnel.management.vo.model.User;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 public interface UserDao {
 
     List<User> selectUsers(User user);
+
+    List<User> selectUsers(User user, RowBounds rowBounds);
 
     User selectUserByUserName(@Param("userName") String userName);
 

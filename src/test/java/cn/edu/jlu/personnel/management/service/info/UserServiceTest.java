@@ -1,6 +1,10 @@
 package cn.edu.jlu.personnel.management.service.info;
 
 import cn.edu.jlu.personnel.management.vo.model.User;
+import org.apache.ibatis.session.RowBounds;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -29,13 +34,20 @@ public class UserServiceTest {
         LOGGER.debug("user is: {}",user);
         User user2 = userService.queryUserById(3).get();
         LOGGER.debug("user2 is: {}",user2);
-        List<User> userList = userService.queryUsers(user);
+        List<User> userList = userService.queryUsers(user, RowBounds.DEFAULT);
         LOGGER.debug("userList is: {}",userList);
     }
 
     @Test
     public void testUpdate(){
-        User user = userService.queryUserInfo("nostalie").get();
+        User user = new User();
+        user.setId(4);
+        user.setUserName("111");
+        user.setRealName("jjj");
+        String time = "2017-05-13 21:24:22";
+        DateTimeFormatter dateTimeFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        DateTime dateTime = dateTimeFormat.parseDateTime(time);
+        user.setUpdateTime(dateTime.toDate());
         int count = userService.updateUser(user);
         Assert.assertEquals(count,1);
     }

@@ -25,12 +25,12 @@ public class SignService {
     private static final String NULL_ERROR = "用户名或密码不能为空";
     private static final String NAME_OR_PASSWORD_ERROR = "用户名或密码错误";
     public static final String SUCCESS = "success";
-    public static final String COOKIE_ERROR = "cookie不合法";
+    public static final String ERROR = "failed";
     @Resource
     private UserDao userDao;
 
     @Read
-    public String signIn(Cookie[] cookies,User user){
+    public String signIn(User user){
         try {
             //用户名密码登录
             if(user != null){
@@ -46,29 +46,8 @@ public class SignService {
                     return NAME_OR_PASSWORD_ERROR;
                 }
                 return SUCCESS;
-            }else{
-                //没有用户名密码时，进行cookie校验
-                List<String> values = Lists.newArrayList();
-                for(Cookie cookie : cookies){
-                    if(Objects.equal(cookie.getName(),CookieService.COOKIE_NAME)){
-                        values = CookieService.VERTICAL_LINE_SPLITTER.splitToList(cookie.getValue());
-                        break;
-                    }
-                }
-                if(values.size() == 3) {
-                    String userName = EncryptUtil.decode(values.get(0));
-                    User userCheck = new User();
-                    userCheck.setUserName(userName);
-                    List<User> users = userDao.selectUsers(userCheck);
-                    Long time = Long.parseLong(EncryptUtil.decode(values.get(1)));
-                    String ip = IdentityInterceptor.IP.get();
-                    String ipCheck = EncryptUtil.decode(values.get(2));
-                    if(time>System.currentTimeMillis() && users.size()==1 && Objects.equal(ip,ipCheck)){
-                        return SUCCESS;
-                    }
-                }
-                return COOKIE_ERROR;
             }
+            return ERROR;
         } catch (Exception e) {
             LOGGER.error("登录失败",e);
             throw new RuntimeException(e);

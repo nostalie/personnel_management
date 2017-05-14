@@ -1,6 +1,7 @@
 package cn.edu.jlu.personnel.management.vo.model;
 
 import cn.edu.jlu.personnel.management.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -12,11 +13,14 @@ public class User {
     private String realName;
     private String userName;
     private Gender gender;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date birthday;
     private String password;
     private Integer departmentId;
     private Integer positionId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
     private Department department;
     private Position position;

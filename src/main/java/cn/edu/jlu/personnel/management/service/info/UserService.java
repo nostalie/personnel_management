@@ -10,6 +10,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -73,13 +74,13 @@ public class UserService {
      * @return
      */
     @Read
-    public List<User> queryUsers(User user){
+    public List<User> queryUsers(User user, RowBounds rowBounds){
         try {
             Preconditions.checkNotNull(user);
             if(user.getPassword() != null) {
                 user.setPassword(EncryptUtil.encode(user.getPassword()));
             }
-            return Lists.transform(userDao.selectUsers(user), new Function<User, User>() {
+            return Lists.transform(userDao.selectUsers(user,rowBounds), new Function<User, User>() {
                 public User apply(User user) {
                     user.setPassword(EncryptUtil.decode(user.getPassword()));
                     fillUser(user);
@@ -117,7 +118,9 @@ public class UserService {
     public int addUser(User user){
         try {
             Preconditions.checkNotNull(user);
-            user.setPassword(EncryptUtil.encode(user.getPassword()));
+            if(user.getPassword() != null) {
+                user.setPassword(EncryptUtil.encode(user.getPassword()));
+            }
             return userDao.insertUser(user);
         } catch (Exception e) {
             LOGGER.error("添加用户失败，user is: {}",user);

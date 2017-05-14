@@ -5,6 +5,7 @@ import cn.edu.jlu.personnel.management.vo.model.Position;
 import cn.edu.jlu.personnel.management.vo.model.User;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,7 @@ public class PositionService {
             Preconditions.checkNotNull(positionId);
             User user = new User();
             user.setPositionId(positionId);
-            List<User> users = userService.queryUsers(user);
+            List<User> users = userService.queryUsers(user, RowBounds.DEFAULT);
             if(!users.isEmpty()){
                 throw new Exception("该职位下仍然存在用户，无法删除");
             }

@@ -26,7 +26,7 @@ public class SignServiceTest {
         User user = new User();
         user.setUserName("nostalie");
         user.setPassword("12345");
-        String result = signService.signIn(null,user);
+        String result = signService.signIn(user);
         LOGGER.debug("result is: {}", result);
     }
 

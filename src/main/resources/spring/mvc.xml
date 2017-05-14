@@ -8,5 +8,34 @@
     <!-- 指定spring注解扫描路径 -->
     <context:component-scan base-package="cn.edu.jlu.personnel.management"/>
     <!-- 开启controller http请求分发-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:argument-resolvers>
+            <bean class="cn.edu.jlu.personnel.management.support.RowBoundsArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="dateConversionService"/>
+            </set>
+        </property>
+    </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.edu.jlu.personnel.management.web.interceptor.ResultInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.edu.jlu.personnel.management.web.interceptor.IPInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/ordinary/sign/in"/>
+            <bean class="cn.edu.jlu.personnel.management.web.interceptor.IdentityInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

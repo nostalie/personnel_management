@@ -35,9 +35,6 @@
         <property name="testOnBorrow" value="false"/>
         <property name="testOnReturn" value="false"/>
 
-        <property name="poolPreparedStatements" value="true"/>
-        <property name="maxPoolPreparedStatementPerConnectionSize"
-                  value="50"/>
     </bean>
 
     <bean id="slave" class="com.alibaba.druid.pool.DruidDataSource"
@@ -64,10 +61,6 @@
         <property name="testWhileIdle" value="true"/>
         <property name="testOnBorrow" value="false"/>
         <property name="testOnReturn" value="false"/>
-
-        <property name="poolPreparedStatements" value="true"/>
-        <property name="maxPoolPreparedStatementPerConnectionSize"
-                  value="50"/>
     </bean>
 
     <bean id="dataSource" class="cn.edu.jlu.personnel.management.datasource.DynamicDataSource">

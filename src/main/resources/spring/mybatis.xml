@@ -5,7 +5,7 @@
 
     <import resource="druid.xml"/>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="mappers/mybatis-config.xml"/>
+        <property name="configLocation" value="classpath:mappers/mybatis-config.xml"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

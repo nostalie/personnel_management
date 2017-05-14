@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="js/init.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                queryUsers(0,100);
+            })
+        });
+        function queryUsers(offset, limit) {
+            var realName = $("#realName").val();
+            var userName = $("#userName").val();
+            var departmentId = $("#department").val();
+            var positionId = $("#position").val();
+            $.ajax({
+               type:"post",
+                url:"/management/bu/super/user/query/all",
+                data:{offset:offset,limit:limit,realName:realName,userName:userName,departmentId:departmentId,positionId:positionId},
+                dataType:"json",
+                success:function (result) {
+                    var html = "";
+                    $.each(result.data,function (i, user) {
+                        html += "<tr>";
+                        html += "<td>" + user.id + "</td>";
+                        html += "<td>" + user.realName + "</td>";
+                        html += "<td>" + user.userName + "</td>";
+                        html += "<td>" + user.department.name + "</td>";
+                        html += "<td>" + user.position.name + "</td>";
+                        html += "<td>" + "<a href='#' onclick=\"deleteUser(" + "\'" +user.userName + "\'" + ")\">删除</a> <a href='#' onclick=\"updateUser(" + user.id + ")\">修改</a>" + "</td>";
+                        html += "</tr>";
+                    });
+                    $("#content").html(html);
+                }
+            });
+        }
+
+        function updateUser(id) {
+            location.href="user_management.html?id=" + id;
+        }
+
+        function deleteUser(userName) {
+            confirm("确认删除?");
+            $.ajax({
+                type:"post",
+                url:"/management/bu/super/user/delete",
+                data:{userName:userName},
+                dataType:"json",
+                success:function () {
+                    alert("success");
+                }
+            });
+            queryUsers(0,100);
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <form class="col-md-12" style="margin-left: 55px">
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="realName">姓名</label>
+                <input type="text" class="form-control" id="realName" name="realName">
+            </div>
+
+            <div class="form-group">
+                <label for="userName">用户名</label>
+                <input type="text" class="form-control" id="userName" name="userName">
+            </div>
+
+            <div class="form-group">
+                <label for="department">部门</label>
+                <select class="form-control" id="department" name="departmentId">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="position">职位</label>
+                <select class="form-control" id="position" name="positionId">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="button" id="submit" value="搜索">
+            </div>
+        </div>
+    </form>
+
+    <div class="col-md-12" style="margin-top: 50px">
+        <table bgcolor="#f8f8ff" align="center" width=83% border="1" cellpadding="5">
+            <thead align="center" bgcolor="#98fb98">
+            <tr>
+                <td>用户编号</td>
+                <td>姓名</td>
+                <td>用户名</td>
+                <td>部门</td>
+                <td>职位</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="content" align="center">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
