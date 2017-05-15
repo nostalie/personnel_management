@@ -12,5 +12,21 @@ $(document).ready(function () {
 
     $("#user_add").click(function () {
         $("#frame").attr("src","user_add.html");
+    });
+
+    $("#auth_group_add").click(function () {
+        $("#frame").attr("src","auth_group_add.html");
+    });
+
+    $("#auth_group_conf").click(function () {
+        $("#frame").attr("src","auth_group_conf.html");
+    });
+
+    $("#department_add").click(function () {
+        $("#frame").attr("src","department_add.html");
+    });
+
+    $("#position_add").click(function () {
+        $("#frame").attr("src","position_add.html");
     })
 });

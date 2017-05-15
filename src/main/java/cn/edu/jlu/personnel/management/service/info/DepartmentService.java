@@ -1,9 +1,13 @@
 package cn.edu.jlu.personnel.management.service.info;
 
 import cn.edu.jlu.personnel.management.dao.DepartmentDao;
+import cn.edu.jlu.personnel.management.enums.Auth;
 import cn.edu.jlu.personnel.management.vo.model.Department;
+import cn.edu.jlu.personnel.management.vo.model.User;
+import cn.edu.jlu.personnel.management.web.interceptor.IdentityInterceptor;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -21,10 +25,32 @@ public class DepartmentService {
 
     @Resource
     private DepartmentDao departmentDao;
+    @Resource
+    private UserService userService;
+    @Resource
+    private DepartmentService departmentService;
 
     public List<Department> queryAllDepartments(){
+        List<Department> result = Lists.newArrayList();
         try {
-            return departmentDao.selectDepartments();
+            int auth = IdentityInterceptor.AUTH.get();
+            if(Auth.isContain(auth,Auth.SUPER_LEADER)) {
+               return departmentDao.selectDepartments();
+            }
+            String userName = IdentityInterceptor.USER_NAME.get();
+            Optional<User> userOptional = userService.queryUserInfo(userName);
+            if(userOptional.isPresent()){
+                User user = userOptional.get();
+                Optional<Department> departmentOptional = departmentService.queryDepartmentById(user.getDepartmentId());
+                if(departmentOptional.isPresent()){
+                    Department department = departmentOptional.get();
+                    result.add(department);
+                }
+            }
+            if(result.size() ==0){
+                throw new Exception("没有相关权限");
+            }
+            return result;
         } catch (Exception e) {
             LOGGER.error("查询全部部门失败");
             throw new RuntimeException(e);

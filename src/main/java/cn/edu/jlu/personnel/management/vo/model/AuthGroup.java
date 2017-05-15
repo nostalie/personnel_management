@@ -1,5 +1,7 @@
 package cn.edu.jlu.personnel.management.vo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -10,6 +12,7 @@ public class AuthGroup {
     private String groupName;
     private Integer type;
     private Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     public Integer getId() {

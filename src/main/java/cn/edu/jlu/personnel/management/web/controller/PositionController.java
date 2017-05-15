@@ -24,4 +24,9 @@ public class PositionController {
     public List<Position> queryAllPositions(){
         return positionService.queryPositions();
     }
+
+    @RequestMapping("/super/position/add")
+    public void addPosition(Position position){
+        positionService.addPosition(position);
+    }
 }

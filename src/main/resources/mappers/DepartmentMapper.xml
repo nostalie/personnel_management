@@ -29,7 +29,7 @@
     </select>
 
     <insert id="insertDepartment" parameterType="Department">
-        INSERT INTO department(name,tel,user_id) VALUE (#{name},#{tel},#{userId})
+        INSERT INTO department(name,tel) VALUE (#{name},#{tel})
     </insert>
 
     <delete id="deleteDepartment" >

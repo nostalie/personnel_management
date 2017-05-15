@@ -6,28 +6,59 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="js/init.js" type="text/javascript"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
+            initPosition();
+            initDepartment();
+        });
+
+        function initDepartment() {
             $.ajax({
-                type: "post",
-                url: "/management/ordinary/query/user/info",
-                dataType: "json",
-                success: function (result) {
-                    var user = result.data;
-                    $("#id").val(user.id);
-                    $("#realName").val(user.realName);
-                    $("#userName").val(user.userName);
-                    $("#gender").val(user.gender);
-                    $("#birthday").val(user.birthday);
-                    $("#department").val(user.departmentId);
-                    $("#position").val(user.positionId);
-                    $("#createTime").val(user.createTime);
-                    $("#updateTime").val(user.updateTime);
+                type:"post",
+                url:"/management/ordinary/department/query/all",
+                dataType:"json",
+                success:function (result) {
+                    var html = "<option value=\"" + "" + "\">" + "请选择" + "</option>";
+                    $.each(result.data,function (n,value) {
+                        html += "<option value=\"" + value.id + "\">" + value.name + "</option>";
+                    });
+                    $("#department").html(html);
+
+                    $.ajax({
+                        type: "post",
+                        url: "/management/ordinary/query/user/info",
+                        dataType: "json",
+                        success: function (result) {
+                            var user = result.data;
+                            $("#id").val(user.id);
+                            $("#realName").val(user.realName);
+                            $("#userName").val(user.userName);
+                            $("#gender").val(user.gender);
+                            $("#birthday").val(user.birthday);
+                            $("#department").val(user.departmentId);
+                            $("#position").val(user.positionId);
+                            $("#createTime").val(user.createTime);
+                            $("#updateTime").val(user.updateTime);
+                        }
+                    });
                 }
             });
-        })
+        }
+
+        function initPosition(){
+            $.ajax({
+                type:"post",
+                url:"/management/ordinary/position/query/all",
+                dataType:"json",
+                success:function (result) {
+                    var html = "<option value=\"" + " " + "\">" + "请选择" + "</option>";
+                    $.each(result.data,function (n, value) {
+                        html += "<option value=\"" + value.id + "\">" + value.name + "</option>";
+                    });
+                    $("#position").html(html);
+                }
+            })
+        }
     </script>
 </head>
 <body>

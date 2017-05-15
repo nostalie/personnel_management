@@ -25,4 +25,9 @@ public class DepartmentController {
     public List<Department> queryAllDepartments(){
         return departmentService.queryAllDepartments();
     }
+
+    @RequestMapping("/super/department/add")
+    public void addDepartment(Department department){
+        departmentService.addDepartment(department);
+    }
 }
