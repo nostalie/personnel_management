@@ -52,8 +52,8 @@
                 url:"/management/bu/super/user/delete",
                 data:{userName:userName},
                 dataType:"json",
-                success:function () {
-                    alert("success");
+                success:function (msg) {
+                    alert(msg.message);
                 }
             });
             queryUsers(0,100);

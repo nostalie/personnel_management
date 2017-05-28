@@ -10,7 +10,7 @@ CREATE TABLE user (
   COMMENT '0-男，1-女',
   birthday      TIMESTAMP          NOT NULL                             DEFAULT now()
   COMMENT '生日',
-  password      VARCHAR(300)       NOT NULL                             DEFAULT ''
+  password      VARCHAR(300)       NOT NULL                             DEFAULT '283A1B1E397C771DB630308070E0E2D5'
   COMMENT '密码',
   department_id INT                NOT NULL                             DEFAULT -1
   COMMENT '所属部门',
@@ -108,3 +108,18 @@ CREATE TABLE user_auth (
   ENGINE = innodb
   DEFAULT CHARSET = utf8
   COMMENT = '用户-权限表';
+
+DROP TABLE IF EXISTS log;
+CREATE TABLE log (
+  id INT AUTO_INCREMENT NOT NULL COMMENT '自增主键',
+  user_name VARCHAR(50) NOT NULL COMMENT '操作人',
+  operation_time TIMESTAMP NOT NULL COMMENT '操作时间',
+  operation_type TINYINT NOT NULL COMMENT '操作类型',
+  old_content VARCHAR(5000) COMMENT '旧内容',
+  new_content VARCHAR(5000) COMMENT '新内容',
+  PRIMARY KEY (id),
+  INDEX idx_operation_time (operation_time)
+)
+  ENGINE = innodb
+  DEFAULT CHARSET = utf8
+  COMMENT = '审计日志表';
