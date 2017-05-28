@@ -38,7 +38,7 @@ CREATE TABLE department (
   COMMENT '部门名称',
   tel         VARCHAR(20)        NOT NULL                             DEFAULT ''
   COMMENT '部门联系电话',
-  user_id     INT                NOT NULL
+  user_id     INT                NOT NULL                             DEFAULT '1'
   COMMENT '部门leader',
   create_time TIMESTAMP          NOT NULL                             DEFAULT CURRENT_TIMESTAMP
   COMMENT '创建时间',
