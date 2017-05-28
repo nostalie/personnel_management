@@ -1,5 +1,6 @@
 package cn.edu.jlu.personnel.management.dao;
 
+import cn.edu.jlu.personnel.management.enums.Auth;
 import cn.edu.jlu.personnel.management.vo.model.AuthGroup;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,8 +29,8 @@ public class AuthGroupDaoTest {
     @Test
     public void testInsert(){
         AuthGroup authGroup = new AuthGroup();
-        authGroup.setGroupName("部leader");
-        authGroup.setType(2);
+        authGroup.setGroupName("root");
+        authGroup.setType(Auth.blend(Auth.BU_LEADER,Auth.SUPER_LEADER,Auth.ORDINARY,Auth.USER_AUTH,Auth.GROUP_AUTH));
         int count = authGroupDao.insertAuthGroup(authGroup);
         LOGGER.debug("count is: {}",count);
     }

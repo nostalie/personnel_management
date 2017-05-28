@@ -16,6 +16,8 @@
     <typeHandlers>
         <typeHandler handler="cn.edu.jlu.personnel.management.support.CodeEnumTypeHandler"
                      javaType="cn.edu.jlu.personnel.management.enums.Gender"/>
+        <typeHandler handler="cn.edu.jlu.personnel.management.support.CodeEnumTypeHandler"
+                     javaType="cn.edu.jlu.personnel.management.enums.OperationType"/>
     </typeHandlers>
 
  <!--   <plugins>
@@ -28,5 +30,6 @@
         <mapper resource="mappers/DepartmentMapper.xml"/>
         <mapper resource="mappers/AuthGroupMapper.xml"/>
         <mapper resource="mappers/UserAuthMapper.xml"/>
+        <mapper resource="mappers/LogMapper.xml"/>
     </mappers>
 </configuration>  
