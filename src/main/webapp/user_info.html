@@ -15,7 +15,7 @@
         function initDepartment() {
             $.ajax({
                 type:"post",
-                url:"/management/ordinary/department/query/all",
+                url:"management/ordinary/department/query/all",
                 dataType:"json",
                 success:function (result) {
                     var html = "<option value=\"" + "" + "\">" + "请选择" + "</option>";
@@ -26,7 +26,7 @@
 
                     $.ajax({
                         type: "post",
-                        url: "/management/ordinary/query/user/info",
+                        url: "management/ordinary/query/user/info",
                         dataType: "json",
                         success: function (result) {
                             var user = result.data;
@@ -48,7 +48,7 @@
         function initPosition(){
             $.ajax({
                 type:"post",
-                url:"/management/ordinary/position/query/all",
+                url:"management/ordinary/position/query/all",
                 dataType:"json",
                 success:function (result) {
                     var html = "<option value=\"" + " " + "\">" + "请选择" + "</option>";

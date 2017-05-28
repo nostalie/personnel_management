@@ -14,7 +14,7 @@
             $("#submit").click(function () {
                 $.ajax({
                     type:"post",
-                    url:"/management/super/position/add",
+                    url:"management/super/position/add",
                     data:$("#form").serialize(),
                     dataType:"json",
                     success:function (result) {

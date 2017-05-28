@@ -21,7 +21,7 @@
                 var groupName = $("#groupName").val();
                 $.ajax({
                     type:"post",
-                    url:"/management/super/auth/group/add",
+                    url:"management/super/auth/group/add",
                     data:{groupName:groupName,type:type},
                     dataType:"json",
                     success:function (result) {

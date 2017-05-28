@@ -13,7 +13,7 @@
             $("#submit").click(function () {
                 $.ajax({
                     type:"post",
-                    url:"/management/ordinary/sign/in",
+                    url:"management/ordinary/sign/in",
                     data:$("#form").serialize(),
                     dataType:"json",
                     success:function (result) {

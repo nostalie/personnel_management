@@ -14,7 +14,7 @@
             var id=uri.substring(uri.indexOf("=")+1);
             $.ajax({
                 type: "post",
-                url: "/management/bu/super/user/query/id",
+                url: "management/bu/super/user/query/id",
                 data:{id:id},
                 dataType: "json",
                 success: function (result) {
@@ -34,7 +34,7 @@
             $("#submit").click(function () {
                 $.ajax({
                     type:"post",
-                    url:"/management/bu/super/user/update",
+                    url:"management/bu/super/user/update",
                     data:$("#form").serialize(),
                     dataType:"json",
                     success:function (result) {

@@ -25,7 +25,7 @@ $(document).ready(function () {
 function initGroup() {
     $.ajax({
         type: "post",
-        url: "/management/super/auth/group/list",
+        url: "management/super/auth/group/list",
         dataType: "json",
         success: function (result) {
             if (result.status == 0) {
@@ -53,7 +53,7 @@ function listAuth() {
     $("#c5").prop("checked", false);
     $.ajax({
         type: "post",
-        url: "/management/super/auth/group/query/id",
+        url: "management/super/auth/group/query/id",
         data: {id: id},
         dataType: "json",
         success: function (result) {
@@ -96,7 +96,7 @@ function update() {
     }
     $.ajax({
         type: "post",
-        url: "/management/super/auth/group/update",
+        url: "management/super/auth/group/update",
         data: {id: id, groupName: groupName, type: type, updateTime: updateTime},
         dataType: "json",
         success: function (result) {
@@ -110,7 +110,7 @@ function delet() {
     var groupName = $("#name").val();
     $.ajax({
         type: "post",
-        url: "/management/super/auth/group/delete",
+        url: "management/super/auth/group/delete",
         data: {id: id, groupName: groupName},
         dataType: "json",
         success: function (result) {
@@ -124,7 +124,7 @@ function queryUser() {
     var id = $("#groupName").val();
     $.ajax({
         type: "post",
-        url: "/management/allot/query/user/group",
+        url: "management/allot/query/user/group",
         data: {groupId: id},
         dataType: "json",
         success: function (result) {
@@ -154,7 +154,7 @@ function deleteUser(userId) {
     var authId = $("#groupName").val();
     $.ajax({
         type: "post",
-        url: "/management/allot/auth/delete",
+        url: "management/allot/auth/delete",
         data: {authId: authId, userId: userId},
         dataType: "json",
         success: function (result) {
@@ -171,7 +171,7 @@ function queryUsers(offset, limit) {
     var positionId = $("#position").val();
     $.ajax({
         type:"post",
-        url:"/management/bu/super/user/query/all",
+        url:"management/bu/super/user/query/all",
         data:{offset:offset,limit:limit,realName:realName,userName:userName,departmentId:departmentId,positionId:positionId},
         dataType:"json",
         success:function (result) {
@@ -195,7 +195,7 @@ function addUser(userId) {
     var authId = $("#groupName").val();
     $.ajax({
         type: "post",
-        url: "/management/allot/auth/add",
+        url: "management/allot/auth/add",
         data: {authId: authId, userId: userId},
         dataType: "json",
         success: function (result) {

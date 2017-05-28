@@ -9,7 +9,7 @@ $(document).ready(function () {
 function initDepartment() {
     $.ajax({
         type:"post",
-        url:"/management/ordinary/department/query/all",
+        url:"management/ordinary/department/query/all",
         dataType:"json",
         success:function (result) {
             var html = "<option value=\"" + "" + "\">" + "请选择" + "</option>";
@@ -24,7 +24,7 @@ function initDepartment() {
 function initPosition(){
     $.ajax({
         type:"post",
-        url:"/management/ordinary/position/query/all",
+        url:"management/ordinary/position/query/all",
         dataType:"json",
         success:function (result) {
             var html = "<option value=\"" + " " + "\">" + "请选择" + "</option>";

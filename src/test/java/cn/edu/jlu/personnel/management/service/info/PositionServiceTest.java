@@ -1,7 +1,6 @@
 package cn.edu.jlu.personnel.management.service.info;
 
 import cn.edu.jlu.personnel.management.vo.model.Position;
-import javafx.geometry.Pos;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,13 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by nostalie on 17-5-10.

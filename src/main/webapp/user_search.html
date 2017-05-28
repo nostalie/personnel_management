@@ -21,7 +21,7 @@
             var positionId = $("#position").val();
             $.ajax({
                type:"post",
-                url:"/management/bu/super/user/query/all",
+                url:"management/bu/super/user/query/all",
                 data:{offset:offset,limit:limit,realName:realName,userName:userName,departmentId:departmentId,positionId:positionId},
                 dataType:"json",
                 success:function (result) {
@@ -49,7 +49,7 @@
             confirm("确认删除?");
             $.ajax({
                 type:"post",
-                url:"/management/bu/super/user/delete",
+                url:"management/bu/super/user/delete",
                 data:{userName:userName},
                 dataType:"json",
                 success:function (msg) {
