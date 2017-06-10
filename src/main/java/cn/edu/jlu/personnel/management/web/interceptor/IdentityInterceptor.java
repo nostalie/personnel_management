@@ -57,7 +57,13 @@ public class IdentityInterceptor extends HandlerInterceptorAdapter {
             USER_NAME.set(userName.get());
             String url = request.getRequestURI();
             DataSourceContext.master();
-            return isPermission(url);
+            if(!isPermission(url)){
+                LOGGER.error("！错误：越权访问");
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().println(new ObjectMapper().writeValueAsString(ResponseResult.error("！错误：越权访问")));
+                return false;
+            }
+            return true;
         }
         LOGGER.error("cookie 不合法或cookie已过期");
         response.setContentType("application/json;charset=utf-8");

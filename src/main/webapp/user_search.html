@@ -25,6 +25,9 @@
                 data:{offset:offset,limit:limit,realName:realName,userName:userName,departmentId:departmentId,positionId:positionId},
                 dataType:"json",
                 success:function (result) {
+                   if (result.status != 0){
+                       alert(result.message);
+                   }
                     var html = "";
                     $.each(result.data,function (i, user) {
                         html += "<tr>";

@@ -25,9 +25,7 @@
                     data:{groupName:groupName,type:type},
                     dataType:"json",
                     success:function (result) {
-                        if(result.status == 0){
-                            alert("success");
-                        }
+                       alert(result.message);
                     }
                 })
             })
